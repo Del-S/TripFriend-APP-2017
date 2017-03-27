@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Plan Trip Fragment -->
+    <string name="fpt_location_title">Location</string>
+    <string name="fpt_location">Select location</string>
+    <string name="fpt_language_title">Language</string>
+    <string name="fpt_language">Select language</string>
+    <string name="fpt_timespan_title">Time span</string>
+    <string name="fpt_timespan">Select time span</string>
+    <string name="fpt_date_title">Date</string>
+    <string name="fpt_date">Select date</string>
+    <string name="fpt_time_title">Time</string>
+    <string name="fpt_time">Select time</string>
+    <string name="fpt_preferences_title">Preferences</string>
+    <string name="fpt_find_friend">Find TripFriend</string>
+
+    <!-- Row Item Preferences -->
+    <string name="rip_title">Preference name</string>
+
+    <!-- Plan Trip Step 2 Fragment -->
+    <string name="rif_name_title">Name:</string>
+    <string name="rif_languages_title">Languages:</string>
+
+    <!-- Plan Trip Step 3 Fragment -->
+    <string name="fpt3_name_title">Name*</string>
+    <string name="fpt3_name">Type in your name</string>
+    <string name="fpt3_surname_title">Surname*</string>
+    <string name="fpt3_surname">Type in your surname</string>
+    <string name="fpt3_email_title">Email*</string>
+    <string name="fpt3_email">Type in your email</string>
+    <string name="fpt3_phone_title">Phone*</string>
+    <string name="fpt3_phone">Type in your phone number</string>
+    <string name="fpt3_pickup_title">Pickup location*</string>
+    <string name="fpt3_pickup">Type in pickup location</string>
+    <string name="fpt3_notes_title">Notes</string>
+    <string name="fpt3_notes">Type in if you have any notes or information</string>
+    <string name="fpt3_book">Book this tour</string>
+
+</resources>

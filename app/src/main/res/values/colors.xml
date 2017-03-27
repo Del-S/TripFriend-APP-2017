@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorOrange">#FB5D19</color>
+
+    <color name="colorPrimary">#39328F</color>
+    <color name="colorPrimaryDark">#06041e</color>
+    <color name="colorAccent">@color/colorOrange</color>
+
+    <color name="colorToolbar">#DDDDDD</color>
+    <color name="colorToolbarIconGray">#FF888888</color>
+
+    <color name="colorGray">#666666</color>
+    <color name="colorMyTrips">#EEEEEE</color>
+
+    <color name="colorDivider">#c0c0c0</color>
+</resources>

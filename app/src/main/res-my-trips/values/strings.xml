@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Element row trip -->
+    <string name="ert_city">City</string>
+    <string name="ert_date_time">Date and time</string>
+
+    <!-- Element detail trip -->
+    <string name="edt_friend_title">Friend info</string>
+    <string name="edt_friend_name">Name</string>
+    <string name="edt_date_time_title">Date and Time</string>
+    <string name="edt_preferences_title">Preferences</string>
+    <string name="edt_preferences">No preferences</string>
+    <string name="edt_edit_trip">Edit Trip</string>
+    <string name="edt_delete_trip">Delete Trip</string>
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TripFriend</string>
+    <string name="title_activity_temp">temp</string>
+
+    <!-- Application menu -->
+    <string name="mb_home">Home</string>
+    <string name="mb_find_friend">Find Friend</string>
+    <string name="mb_plan_trip">Plan Trip</string>
+    <string name="mb_my_trips">My Trips</string>
+    <string name="mb_more">More</string>
+
+    <!-- Main activity -->
+    <string name="am_title">Welcome to TripFriend</string>
+    <string name="am_description">In Prague for the first time? Let us show you all the sights of this beautiful city.</string>
+    <string name="am_find_friend_title">In Prague right now? Let us show you all the sights of this beautiful city. Find your TripFriend now!</string>
+    <string name="am_find_friend">Find TripFriend NOW</string>
+    <string name="am_plan_trip_title">Are you planning a trip to Prague and want to see not just the regular tourist destinations but the various local hotspots? You can plan your trip now!</string>
+    <string name="am_plan_trip">Find TripFriend NOW</string>
+
+</resources>
