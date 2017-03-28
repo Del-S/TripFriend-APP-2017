@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorTreeAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,14 +40,16 @@ public class MyTripsAdapter extends CursorTreeAdapter {
     private ScheduleCursorWrapper groupCursor, childCursor;
     private MyTripsActivity mActivity;
     private Context context;
+    private long selectedId;
     private Configuration c = Configuration.getInstance();
     private SimpleDateFormat sdf = new SimpleDateFormat(BaseActivity.DATE_HOUR_FORMAT, BaseActivity.APP_LOCALE);
 
-    public MyTripsAdapter(Cursor cursor, Context context) {
+    public MyTripsAdapter(Cursor cursor, Context context, long selectedId) {
         super(cursor, context);
         this.context = context;
         mInflator = LayoutInflater.from(context);
         mActivity = (MyTripsActivity) context;
+        this.selectedId = selectedId;
     }
 
     @Override
@@ -112,6 +115,12 @@ public class MyTripsAdapter extends CursorTreeAdapter {
             view.setBackgroundColor( ContextCompat.getColor(context, R.color.colorMyTrips) );
             mLocation.setTextColor( ContextCompat.getColor(context, R.color.colorPrimaryDark) );
             mDateTime.setTextColor( ContextCompat.getColor(context, R.color.colorGray) );
+        }
+
+        // Expand this view if it should be expanded (is selected)
+        if( selectedId == s.getId() ) {
+            view.callOnClick();
+            Log.d("MyTripsAdapter", "Been clicked");
         }
     }
 

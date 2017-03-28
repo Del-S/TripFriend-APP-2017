@@ -25,8 +25,6 @@ public class MyTripsFragment extends Fragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
         // Prepare the loader. Either re-connect with an existing one,
@@ -44,9 +42,26 @@ public class MyTripsFragment extends Fragment implements
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_trips, container, false);
 
-        ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.fmt_trips);
-        mAdapter = new MyTripsAdapter( null, getActivity() );
+        // Get id of trip that is expanded
+        long selectedId = getActivity().getIntent().getLongExtra("trip_id", -1);
+
+        final ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.fmt_trips);
+        mAdapter = new MyTripsAdapter( null, getActivity(), selectedId );
         expandableListView.setAdapter(mAdapter);
+
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            // Keep track of previous expanded parent
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                // Collapse previous parent if expanded.
+                if ((previousGroup != -1) && (groupPosition != previousGroup)) {
+                    expandableListView.collapseGroup(previousGroup);
+                }
+                previousGroup = groupPosition;
+            }
+        });
 
         return view;
     }

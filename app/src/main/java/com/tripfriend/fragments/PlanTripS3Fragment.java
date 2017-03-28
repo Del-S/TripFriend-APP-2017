@@ -1,11 +1,13 @@
 package com.tripfriend.fragments;
 
 import android.content.ContentUris;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.tripfriend.R;
+import com.tripfriend.activities.MyTripsActivity;
 import com.tripfriend.adapters.FriendsAdapter;
 import com.tripfriend.model.Schedule;
 import com.tripfriend.model.database.ScheduleProvider;
@@ -63,10 +66,12 @@ public class PlanTripS3Fragment extends Fragment {
                                 mSelectionArgs
                         );
                     } else {
-                        getActivity().getContentResolver().insert(
+                        Uri uriAdded = getActivity().getContentResolver().insert(
                                 ScheduleProvider.CONTENT_URI,
                                 s.getContentValues()
                         );
+
+                        idSchedule = ContentUris.parseId(uriAdded);
                     }
 
                     // Reset schedule instance
@@ -75,13 +80,10 @@ public class PlanTripS3Fragment extends Fragment {
                     // Finish all fragments before this one
                     getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
-                    Fragment newFragment = new CompletedFragment();
-                    android.support.v4.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-                    transaction.replace(R.id.apt_fragment, newFragment);
-                    transaction.addToBackStack(null);
-
-                    transaction.commit();
+                    Intent i = new Intent(getActivity(), MyTripsActivity.class);
+                    Log.d("P3Frag", String.valueOf(idSchedule));
+                    i.putExtra("trip_id", idSchedule);
+                    startActivity(i);
                 }
             }
         });
