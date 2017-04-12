@@ -34,6 +34,9 @@ import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * Adapter that displays Schedules into expandable list view
+ */
 public class MyTripsAdapter extends CursorTreeAdapter {
 
     private LayoutInflater mInflator;
@@ -62,12 +65,14 @@ public class MyTripsAdapter extends CursorTreeAdapter {
     @Override
     protected Cursor getChildrenCursor(Cursor cursor) {
         // Given the group, we return a cursor for all the children within that
-        // group
+        // In this case there is always only 1 children
         int groupId = groupCursor.getInt(groupCursor
                 .getColumnIndex(Schedule.KEY_ID));
 
+        // Url for specific children
         Uri uri = Uri.parse(ScheduleProvider.CONTENT_URI + "/" + groupId);
 
+        // Load cursor for url
         CursorLoader cursorLoader = new CursorLoader(mActivity, uri, null, null, null, null);
         Cursor childCursor = null;
 
@@ -90,20 +95,27 @@ public class MyTripsAdapter extends CursorTreeAdapter {
 
     @Override
     protected void bindGroupView(View view, Context context, Cursor cursor, boolean b) {
+        // Wrap cursor on wrapper to get schedule
         groupCursor = new ScheduleCursorWrapper(cursor);
-
         final Schedule s = groupCursor.getSchedule();
+
+        // Load row widgets
         ImageView mIcon = (ImageView) view.findViewById(R.id.ert_icon);
         TextView mLocation = (TextView) view.findViewById(R.id.ert_city);
         TextView mDateTime = (TextView) view.findViewById(R.id.ert_date_time);
 
+        // Load image resource for user image
         int imageId = context.getResources().getIdentifier("friend_"+s.getId_friend(), "drawable", context.getPackageName());
         mIcon.setImageResource(imageId);
+
+        // Set location an d date
         String location = c.getLocations().get(s.getLocation());
         mLocation.setText(location);
         String dateTime = sdf.format( s.getCalendar_start().getTime() );
         mDateTime.setText(dateTime);
 
+        // Changing expand / less icon on the right of the row
+        // If expanded change resource and colors
         ImageView iv = (ImageView) view.findViewById(R.id.ert_expand);
         if (b) {
             iv.setImageResource(R.drawable.ic_expand_less_24dp);
@@ -133,20 +145,20 @@ public class MyTripsAdapter extends CursorTreeAdapter {
 
     @Override
     protected void bindChildView(View view, Context context, Cursor cursor, boolean b) {
+        // Wrap cursor on wrapper to get schedule
         childCursor = new ScheduleCursorWrapper(cursor);
         final Schedule s = childCursor.getSchedule();
 
+        // Load row widgets
         TextView mLocation = (TextView) view.findViewById(R.id.edt_location);
         TextView mLanguage = (TextView) view.findViewById(R.id.edt_language);
         TextView mTimeSpan = (TextView) view.findViewById(R.id.edt_timespan);
-
         TextView mDateTime = (TextView) view.findViewById(R.id.edt_date_time);
         TextView mPreferences = (TextView) view.findViewById(R.id.edt_preferences);
-
+        TextView mFrendName = (TextView) view.findViewById(R.id.edt_friend_name);
         ImageView iv = (ImageView) view.findViewById(R.id.edt_friend_image);
 
-        TextView mFrendName = (TextView) view.findViewById(R.id.edt_friend_name);
-
+        // Set location, language and timespan
         String location = c.getLocations().get(s.getLocation());
         mLocation.setText(location);
         String language = c.getLanguages().get(s.getLanguage());
@@ -154,9 +166,11 @@ public class MyTripsAdapter extends CursorTreeAdapter {
         String timeSpan = c.getTime_spans().get(s.getTime_span());
         mTimeSpan.setText(timeSpan);
 
+        // Set DateTime - needs to be parsed from Date to String
         String dateTime = sdf.format(s.getCalendar_start().getTime());
         mDateTime.setText(dateTime);
 
+        // Set preferences - First we parse List<String> into String (name,name,name...)
         StringBuilder friendsList = new StringBuilder();
             if(s.getPreferences() != null) {
             for(String preference : s.getPreferences() ){
@@ -167,12 +181,15 @@ public class MyTripsAdapter extends CursorTreeAdapter {
             mPreferences.setText(friendsList.toString());
         }
 
+        // Set friend name
         Friend f = c.getFriendByID(s.getId_friend());
         mFrendName.setText(f.getName());
 
+        // Load image based on friend id (resource)
         int imageId = context.getResources().getIdentifier("friend_"+s.getId_friend(), "drawable", context.getPackageName());
         iv.setImageResource(imageId);
 
+        // Load buttons and listeners
         Button mDelete = (Button) view.findViewById(R.id.edt_delete_trip);
         mDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,6 +209,11 @@ public class MyTripsAdapter extends CursorTreeAdapter {
         });
     }
 
+    /**
+     * Shows alert dialog if user presses delete Tour in list
+     *
+     * @param id of tour to be deleted
+     */
     private void showDeleteAllMessage(final long id) {
         new AlertDialog.Builder(mActivity)
                 .setTitle("Delete the tour")
@@ -206,6 +228,11 @@ public class MyTripsAdapter extends CursorTreeAdapter {
                 .show();
     }
 
+    /**
+     * Deletes the trip from database
+     *
+     * @param id of tour to delete
+     */
     private void deleteTrip(long id) {
         // Defines selection criteria for the rows you want to delete
         String mSelectionClause = Schedule.KEY_ID + " LIKE ?";
@@ -213,12 +240,14 @@ public class MyTripsAdapter extends CursorTreeAdapter {
         // Defines a variable to contain the number of rows deleted
         int mRowsDeleted = 0;
 
+        // Deletes row via ContentResolver
         mRowsDeleted = mActivity.getContentResolver().delete(
                 ScheduleProvider.CONTENT_URI,
                 mSelectionClause,
                 mSelectionArgs
         );
 
+        // If it deleted atleast one row then the cursor needs to be updated as well to display changes
         if(mRowsDeleted > 0) {
             CursorLoader cursorLoader = new CursorLoader(mActivity, ScheduleProvider.CONTENT_URI, null, null, null, null);
             this.changeCursor(cursorLoader.loadInBackground());

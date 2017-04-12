@@ -35,6 +35,7 @@ public class PlanDialogFragment extends DialogFragment implements DatePickerDial
         CharSequence[] cs = new CharSequence[0];
         int position;
 
+        // Create dialog type based on type
         switch (getTargetRequestCode()) {
             case 0:
                 return createDatePickerDialog();
@@ -75,6 +76,12 @@ public class PlanDialogFragment extends DialogFragment implements DatePickerDial
         }
     }
 
+    /**
+     * Gets what position should be active
+     *
+     * @param position to check
+     * @return position index
+     */
     private int getKeyIndex(int position) {
         int index = 0;
         for(int key : keySet) {
@@ -84,6 +91,11 @@ public class PlanDialogFragment extends DialogFragment implements DatePickerDial
         return -1;
     }
 
+    /**
+     * Creates picker for date
+     *
+     * @return Dialog instance
+     */
     public Dialog createDatePickerDialog() {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -95,6 +107,11 @@ public class PlanDialogFragment extends DialogFragment implements DatePickerDial
         return datePickerDialog;
     }
 
+    /**
+     * Creates Time Picker
+     *
+     * @return Dialog instance
+     */
     public Dialog createTimePickerDialog() {
         int hour = c.get(Calendar.HOUR);
         int minute = c.get(Calendar.MINUTE);
@@ -103,6 +120,14 @@ public class PlanDialogFragment extends DialogFragment implements DatePickerDial
         return timePickerDialog;
     }
 
+    /**
+     * Creates radio button picker dialog (only one can be selected)
+     *
+     * @param title of the dialog
+     * @param cs items to select from
+     * @param position selected position
+     * @return Dialog instance
+     */
     public Dialog createPickerDialog(String title, CharSequence[] cs, int position) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
         dialog.setTitle(title);

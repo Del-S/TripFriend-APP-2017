@@ -12,13 +12,13 @@
 
     <item
         android:id="@+id/action_find_friend"
-        android:icon="@drawable/ic_person_gray_24dp"
+        android:icon="@drawable/ic_search_gray_24dp"
         android:title="@string/mb_find_friend"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_plan_trip"
-        android:icon="@drawable/ic_search_gray_24dp"
+        android:icon="@drawable/ic_book_24dp"
         android:title="@string/mb_plan_trip"
         app:showAsAction="always" />
 

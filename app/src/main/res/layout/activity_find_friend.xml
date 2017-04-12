@@ -7,7 +7,7 @@
     tools:context="com.tripfriend.activities.FindFriendActivity">
 
     <FrameLayout
-        android:id="@+id/aff_frame"
+        android:id="@+id/aff_fragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"

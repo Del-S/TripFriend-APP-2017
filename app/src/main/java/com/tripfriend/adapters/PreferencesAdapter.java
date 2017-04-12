@@ -15,6 +15,9 @@ import com.tripfriend.adapters.holders.PreferenceHolder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter that displays Preferences in order process
+ */
 public class PreferencesAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -46,10 +49,11 @@ public class PreferencesAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         PreferenceHolder viewHolder;
         if(view == null){
+            // Inflate View
             LayoutInflater layoutInflater = (LayoutInflater) mContext.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
             view = layoutInflater.inflate(R.layout.row_item_preferences, viewGroup, false);
+
             viewHolder = new PreferenceHolder(view);
 
             final CheckBox ch = viewHolder.mSelected;

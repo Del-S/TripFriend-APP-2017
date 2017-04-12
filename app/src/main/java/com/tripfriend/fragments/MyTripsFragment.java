@@ -17,15 +17,15 @@ import com.tripfriend.R;
 import com.tripfriend.adapters.MyTripsAdapter;
 import com.tripfriend.model.database.ScheduleProvider;
 
-
 public class MyTripsFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
     MyTripsAdapter mAdapter;
 
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_my_trips, container, false);
 
         // Prepare the loader. Either re-connect with an existing one,
         // or start a new one.
@@ -35,20 +35,16 @@ public class MyTripsFragment extends Fragment implements
         } else {
             getActivity().getSupportLoaderManager().initLoader(0, null, this);
         }
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_trips, container, false);
 
         // Get id of trip that is expanded
         long selectedId = getActivity().getIntent().getLongExtra("trip_id", -1);
 
+        // Load expandable view and set adapter
         final ExpandableListView expandableListView = (ExpandableListView) view.findViewById(R.id.fmt_trips);
         mAdapter = new MyTripsAdapter( null, getActivity(), selectedId );
         expandableListView.setAdapter(mAdapter);
 
+        // Expand on click listener (only one open - collapse others)
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             // Keep track of previous expanded parent
             int previousGroup = -1;

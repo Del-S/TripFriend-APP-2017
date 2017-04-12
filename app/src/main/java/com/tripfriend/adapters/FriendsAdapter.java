@@ -15,6 +15,9 @@ import com.tripfriend.model.Friend;
 
 import java.util.List;
 
+/**
+ * Adapter that displays Friends in order process
+ */
 public class FriendsAdapter extends BaseAdapter {
     private Context mContext;
     private List<Friend> mFriends;
@@ -43,14 +46,19 @@ public class FriendsAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         FriendHolder viewHolder;
         if(view == null){
+            // Inflate View
             LayoutInflater layoutInflater = (LayoutInflater) mContext.
                     getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = layoutInflater.inflate(R.layout.row_item_friend, viewGroup, false);
 
+            // Load Friend instance
             Friend f = (Friend) getItem(i);
 
-            view = layoutInflater.inflate(R.layout.row_item_friend, viewGroup, false);
+            // Load ViewHolder and fill the data
             viewHolder = new FriendHolder(view);
             viewHolder.mName.setText( f.getName() );
+            int imageId = mContext.getResources().getIdentifier("friend_"+f.getId(), "drawable", mContext.getPackageName());
+            viewHolder.imageView.setImageResource(imageId);
             view.setTag(viewHolder);
         }
         else {

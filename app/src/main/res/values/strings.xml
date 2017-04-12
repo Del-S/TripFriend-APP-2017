@@ -13,9 +13,10 @@
     <string name="am_title">Welcome to TripFriend</string>
     <string name="am_description">In Prague for the first time? Let us show you all the sights of this beautiful city.</string>
     <string name="am_find_friend_title">In Prague right now? Let us show you all the sights of this beautiful city. Find your TripFriend now!</string>
-    <string name="am_find_friend">Find TripFriend NOW</string>
+    <string name="am_find_friend">Find TripFriend now</string>
     <string name="am_plan_trip_title">Are you planning a trip to Prague and want to see not just the regular tourist destinations but the various local hotspots? You can plan your trip now!</string>
-    <string name="am_plan_trip">Find TripFriend NOW</string>
+    <string name="am_plan_trip">Plan your trip now</string>
     <string name="title_activity_maps">Map</string>
+    <string name="g_not_implemented">I\'m not implemented yet.</string>
 
 </resources>

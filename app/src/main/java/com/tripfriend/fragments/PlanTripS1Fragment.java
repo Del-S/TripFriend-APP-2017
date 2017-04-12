@@ -30,7 +30,6 @@ public class PlanTripS1Fragment extends Fragment {
 
     final Configuration c = Configuration.getInstance();
     final Schedule s = Schedule.getPlanInstance();
-    LoadConfiguration loadConfiguration;
     Button buttonDate, buttonTime, findTripFriend;
     Calendar scheduledDate;
     PlanDialogFragment dialogFragment;
@@ -46,10 +45,6 @@ public class PlanTripS1Fragment extends Fragment {
     public static final int RC_DIALOG_LOCATION = 2;
     public static final int RC_DIALOG_LANGUAGE = 3;
     public static final int RC_DIALOG_TIMESPAN = 4;
-
-    public static PlanTripS1Fragment newInstance() {
-        return new PlanTripS1Fragment();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,7 +71,6 @@ public class PlanTripS1Fragment extends Fragment {
         dialogFragment = new PlanDialogFragment();
         df = new SimpleDateFormat("dd/MM/yyyy");
         mPreferences = c.getPreferences();
-        //loadConfiguration = LoadConfiguration.getInstance(getActivity());
 
         sDate = false;
         sTime = false;

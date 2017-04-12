@@ -14,6 +14,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Cursor wrapper for Expandable List View
+ * - Loads Schedule
+ */
 public class ScheduleCursorWrapper extends CursorWrapper {
 
     SimpleDateFormat sdf = new SimpleDateFormat(BaseActivity.DATE_HOUR_FORMAT, BaseActivity.APP_LOCALE);
@@ -39,6 +43,7 @@ public class ScheduleCursorWrapper extends CursorWrapper {
         String pickup = getString(getColumnIndex(Schedule.KEY_PICKUPLOCATION));
         String notes = getString(getColumnIndex(Schedule.KEY_NAME));
 
+        // Parsing String date into Date format
         String date = getString(getColumnIndex(Schedule.KEY_CALENDARSTART));
         Calendar c = null;
         try {
@@ -50,6 +55,7 @@ public class ScheduleCursorWrapper extends CursorWrapper {
             Log.e(TAG, e.getLocalizedMessage());
         }
 
+        // Parse preferences from String (name,name,name) into List of Strings
         String p = getString(getColumnIndex(Schedule.KEY_PREFERENCES));
         String[] items = p.split(",");
         List<String> list = new ArrayList<String>();
@@ -57,6 +63,7 @@ public class ScheduleCursorWrapper extends CursorWrapper {
             list.add(items[i]);
         }
 
+        // Create new schedule and return it
         Schedule s = new Schedule(location, language, timespan, idFriend, group, c, name, surname, email, phone, pickup, notes, null, state);
         s.setId(id);
         return s;

@@ -7,6 +7,11 @@ import android.widget.TextView;
 
 import com.tripfriend.R;
 
+/**
+ * Preference Holder for display in order process
+ * - Title of the preference
+ * - Checkbox if its selected
+ */
 public class PreferenceHolder extends RecyclerView.ViewHolder {
 
     public TextView mTitle;

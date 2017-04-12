@@ -9,6 +9,9 @@ import com.tripfriend.BaseActivity;
 import com.tripfriend.R;
 import com.tripfriend.fragments.MyTripsFragment;
 
+/**
+ * Displays all user trips (past and future)
+ */
 public class MyTripsActivity extends BaseActivity {
 
     public Fragment mFragment;
@@ -16,10 +19,12 @@ public class MyTripsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("My Trips");
+        setTitle("My Trips");       // Not needed
 
+        // Creates a new fragment
         mFragment = new MyTripsFragment();
 
+        // Get fragment manager and inflate it
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.amt_fragment);
         if (fragment == null) {
